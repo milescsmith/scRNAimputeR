@@ -30,7 +30,7 @@ setMethod("PlaceData",
                    ...){
             
             data <- Matrix(data = data, sparse = TRUE)
-            object[[assay]] <- CreateAssayObject(data = new.data = imputed_data)
+            object[[assay]] <- CreateAssayObject(data = imputed_data)
             if (normalize)
             {
               object <- NormalizeData(object, assay = assay)
