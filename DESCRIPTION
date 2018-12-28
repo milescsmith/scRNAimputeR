@@ -1,12 +1,12 @@
 Package: scRNAimputeR
-Type: Package
 Title: Collection of scRNAseq Imputation Algorithms
-Version: 0.1.0
-Authors@R: person("Miles", "Smith", , email = "miles-smith@omrf.org",
-                  role = c("aut"))
-Maintainer: Miles Smith <mileschristiansmith@gmail.com>
-Description: Collects scRNAseq imputation algorithms and provides functions for interfacing with Seurat objects.
-Depends: 
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Miles",
+           family = "Smith",
+           role = c("aut", "cre"),
+           email = "mileschristiansmith@gmail.com")
+Description: Collects scRNAseq imputation algorithms and provides functions for interfacing with Seurat objects..Depends: 
     R (>= 3.5.0),
     Seurat (>= 2.3.4),
     Matrix,
