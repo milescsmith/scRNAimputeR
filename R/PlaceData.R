@@ -22,7 +22,7 @@ setGeneric(
 setMethod("PlaceData",
           signature(object='Seurat'),
           function(object,
-                   assay = "RNA",
+                   assay = "new_assay",
                    slot.use = "data",
                    imputed_data,
                    normalize = "FALSE",
@@ -30,10 +30,7 @@ setMethod("PlaceData",
                    ...){
             
             data <- Matrix(data = data, sparse = TRUE)
-            object <- SetAssayData(object = seuratObj, 
-                                   assay = assay,
-                                   slot = slot.use,
-                                   new.data = imputed_data)
+            object[[assay]] <- CreateAssayObject(data = new.data = imputed_data)
             if (normalize)
             {
               object <- NormalizeData(object, assay = assay)
@@ -47,7 +44,7 @@ setMethod("PlaceData",
 setMethod("PlaceData",
           signature(object='seurat'),
           function(object,
-                   assay = "RNA",
+                   assay = "new_assay",
                    slot.use = "data",
                    imputed_data,
                    normalize = "FALSE",
