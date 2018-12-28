@@ -1,11 +1,10 @@
-Package: imputeRs
+Package: imputeR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Collection of scRNAseq Imputation Algorithms
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Miles Smith
+Maintainer: Miles Smith <mileschristiansmith@gmail.com>
+Description: Collects scRNAseq imputation algorithms and provides functions for interfacing with Seurat objects.
+License: BSD3
 Encoding: UTF-8
 LazyData: true
