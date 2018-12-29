@@ -4,7 +4,8 @@
 \alias{dca}
 \title{Deep count autoencoder}
 \usage{
-dca(exprDat, mode = "denoise", ae_type = "zinb-conddisp",
+dca(object = object, assay = "RNA", slot.use = "counts",
+  mode = "denoise", ae_type = "zinb-conddisp",
   normalize_per_cell = TRUE, scale = TRUE, log1p = TRUE,
   batchnorm = TRUE, activation = "relu", init = "glorot_uniform",
   epochs = 300, reduce_lr = 10, early_stop = 15, batch_size = 32,
@@ -13,8 +14,11 @@ dca(exprDat, mode = "denoise", ae_type = "zinb-conddisp",
   copy = FALSE)
 }
 \arguments{
-\item{exprDat}{Unnomalized, unscaled gene expression matrix, with cell names
-as rows and gene names as columns}
+\item{object}{Seurat object}
+
+\item{assay}{Assay from which the data to impute should come.  (default: "RNA")}
+
+\item{slot.use}{Slot to take data from. (default: "counts")}
 
 \item{mode}{character. "denoise"(default), or "latent".  "denoise"
 overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
@@ -86,6 +90,9 @@ zinb-conddisp.}
 
 \item{copy}{boolean (default: FALSE). If true, a copy of anndata
 is returned.}
+}
+\value{
+A Seurat object with imputed data stored in an assay slot named 'dca'
 }
 \description{
 Performs denoising of gene expression using dca

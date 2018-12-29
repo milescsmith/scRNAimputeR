@@ -1,3 +1,4 @@
+
 #' Deep count autoencoder
 #'
 #' Performs denoising of gene expression using dca
@@ -5,8 +6,9 @@
 #' Some arguments have been removed due to being troublesome in the R-Python
 #' interface
 #'
-#' @param exprDat Unnomalized, unscaled gene expression matrix, with cell names
-#'   as rows and gene names as columns
+#' @param object Seurat object
+#' @param assay Assay from which the data to impute should come.  (default: "RNA")
+#' @param slot.use Slot to take data from. (default: "counts")
 #' @param mode character. "denoise"(default), or "latent".  "denoise"
 #'   overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
 #'   adds "adata.obsm["X_dca"]" to given adata object. This matrix represent
@@ -63,12 +65,16 @@
 #' @importFrom reticulate import py_module_available dict
 #' @importFrom parallel detectCores
 #' @importFrom glue glue
+#' @importFrom magrittr "%>%"
 #'
-#' @return
+#' @return A Seurat object with imputed data stored in an assay slot named 'dca'
 #' @export
 #'
 #' @examples
-dca <- function(exprDat,
+
+dca <- function(object = object,
+                assay = "RNA",
+                slot.use = "counts",
                 mode = 'denoise',
                 ae_type = 'zinb-conddisp',
                 normalize_per_cell = TRUE,
@@ -104,6 +110,7 @@ dca <- function(exprDat,
     threads <- detectCores()
   }
 
+  exprDat <- GatherData(object, assay, slot.use) %>% t()
   dca.module <- import(module = 'dca.api', delay_load = TRUE)
   scanpy.module <- import(module = 'scanpy.api', delay_load = TRUE)
 
@@ -117,8 +124,6 @@ dca <- function(exprDat,
   adata$var_names <- gene.names
   scanpy.module$pp$filter_genes(data = adata,
                                 min_counts = as.integer(1))
-  scanpy.module$pp$filter_genes(data = adata,
-                                min_cells = as.integer(3))
 
   dca.module$dca(adata = adata,
                  mode = mode,
@@ -143,6 +148,9 @@ dca <- function(exprDat,
 
   conv <- adata$data %>% t()
   colnames(conv) <- adata$obs_names$values
-  rownames(conv) <- glue("DCA_{adata$var_names$values}")
-  return(conv)
+  rownames(conv) <- adata$var_names$values
+  object <- PlaceData(object = object,
+                      assay.store = "dca",
+                      imputed_data = conv)
+  return(object)
 }

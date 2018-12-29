@@ -77,11 +77,8 @@ autoimpute <- function(object,
   
   colnames(ai_data) <- cell.names
   rownames(ai_data) <- glue("AI_{gene.names}")
-  object <- PlaceData(object,
-                      assay.store = "RNA",
-                      slot.store = "data",
-                      imputed_data,
-                      normalize,
-                      scale)
+  object <- PlaceData(object = object,
+                      assay.store = "autoimpute", 
+                      imputed_data = ai_data)
   return(object)
 }
