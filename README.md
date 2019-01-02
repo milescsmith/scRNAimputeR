@@ -3,7 +3,7 @@ A effort to collect all of the scRNA imputation methods and allow them to interf
 
 Currently, only the following work:
  * [ALRA](https://github.com/KlugerLab/ALRA/), though you can find this as an installable R package [here](https://github.com/milescsmith/ALRA/)
- * [AutoImpute](https://github.com/divyanshu-talwar/AutoImpute), though like above, you can find an installable Python package [here](https://github.com/divyanshu-talwar/AutoImpute)
+ * [AutoImpute](https://github.com/divyanshu-talwar/AutoImpute), though like above, you can find an installable Python package [here](https://github.com/milescsmith/AutoImpute)
  * [DCA](https://github.com/theislab/dca)
  
  The following are others I'm aware of and planning to include:
