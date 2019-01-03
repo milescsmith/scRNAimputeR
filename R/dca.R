@@ -1,4 +1,3 @@
-
 #' Deep count autoencoder
 #'
 #' Performs denoising of gene expression using dca

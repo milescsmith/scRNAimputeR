@@ -23,17 +23,17 @@ PlaceData.Seurat <- function(object,
                    scale = "FALSE",
                    ...){
             
-            imputed_data %<>% as.matrix()
-            object[[assay.store]] <- CreateAssayObject(data = imputed_data)
-            if (normalize)
-            {
-              object <- NormalizeData(object, assay = assay.store)
-            }
-            if (scale){
-              object <- ScaleData(object, assay = assay.store, ...)
-            }
-            return(object)
-          }
+  imputed_data %<>% as.matrix()
+  object[[assay.store]] <- CreateAssayObject(data = imputed_data)
+  if (normalize)
+  {
+    object <- NormalizeData(object, assay = assay.store)
+  }
+  if (scale){
+    object <- ScaleData(object, assay = assay.store, ...)
+  }
+  return(object)
+}
 
 #' @rdname PlaceData
 #' @method PlaceData seurat
@@ -47,22 +47,22 @@ PlaceData.seurat <- function(object,
                    scale = "FALSE",
                    ...){
             
-            data <- Matrix(data = data, sparse = TRUE)
-            object <- SetAssayData(object = seuratObj, 
-                                   assay = assay,
-                                   slot = slot.use,
-                                   new.data = imputed_data)
-            if (normalize){
-              object <- NormalizeData(object, assay.type = assay)
-            }
-            if (scale){
-              object <- ScaleData(object, ...)
-            }
-            return(object)
-          }
+  data <- Matrix(data = data, sparse = TRUE)
+  object <- SetAssayData(object = seuratObj, 
+                         assay = assay,
+                         slot = slot.use,
+                         new.data = imputed_data)
+  if (normalize){
+    object <- NormalizeData(object, assay.type = assay)
+  }
+  if (scale){
+    object <- ScaleData(object, ...)
+  }
+  return(object)
+}
 
 GatherData <- function(object, ...) {
-    useMethod("GatherData")
+    UseMethod("GatherData")
   }
 
 #' GatherData
