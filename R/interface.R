@@ -1,9 +1,6 @@
-setGeneric(
-  name = "PlaceData",
-  def = function(object, ...) {
-    standardGeneric("PlaceData")
+PlaceData <- function(object, ...) {
+    UseMethod("PlaceData")
   }
-)
 
 #' PlaceData
 #'
@@ -15,13 +12,11 @@ setGeneric(
 #' @importFrom magrittr "%>%" "%<>%"
 #' @importFrom Matrix Matrix
 #'
-#' @return matrix
+#' @rdname PlaceData
+#' @method PlaceData Seurat
+#' @return
 #' @export
-#'
-#' @examples
-setMethod("PlaceData",
-          signature(object='Seurat'),
-          function(object,
+PlaceData.Seurat <- function(object,
                    assay.store = "new_assay",
                    imputed_data,
                    normalize = "FALSE",
@@ -38,11 +33,13 @@ setMethod("PlaceData",
               object <- ScaleData(object, assay = assay.store, ...)
             }
             return(object)
-          })
+          }
 
-setMethod("PlaceData",
-          signature(object='seurat'),
-          function(object,
+#' @rdname PlaceData
+#' @method PlaceData seurat
+#' @return
+#' @export
+PlaceData.seurat <- function(object,
                    assay = "new_assay",
                    slot.use = "data",
                    imputed_data,
@@ -62,14 +59,11 @@ setMethod("PlaceData",
               object <- ScaleData(object, ...)
             }
             return(object)
-          })
+          }
 
-setGeneric(
-  name = "GatherData",
-  def = function(object, ...) {
-    standardGeneric("GatherData")
+GatherData <- function(object, ...) {
+    useMethod("GatherData")
   }
-)
 
 #' GatherData
 #'
@@ -81,33 +75,33 @@ setGeneric(
 #' @importFrom Seurat GetAssayData
 #' @importFrom magrittr %>%
 #'
+#' @rdname GatherData
+#' @method GatherData Seurat
 #' @return matrix
 #' @export
-#'
-#' @examples
-setMethod("GatherData",
-          signature(object='Seurat'),
-          function(object,
-                   assay = "RNA",
-                   slot.use = "data",
-                   ...){
+GatherData.Seurat <- function(object,
+                              assay = "RNA",
+                              slot.use = "data",
+                              ...){
             
-            obj_data <- GetAssayData(object = object, 
-                                     assay = assay,
-                                     slot = slot.use) %>%
-              as.matrix()
-            return(obj_data)
-          })
+  obj_data <- GetAssayData(object = object, 
+                           assay = assay,
+                           slot = slot.use) %>%
+    as.matrix()
+  return(obj_data)
+}
 
-setMethod("GatherData",
-          signature(object='seurat'),
-          function(object,
-                   assay = "RNA",
-                   slot.use = "data",
-                   ...){
-            obj_data <- GetAssayData(object = object, 
-                                     assay = assay,
-                                     slot = slot.use) %>%
-              as.matrix()
-            return(obj_data)
-          })
+#' @rdname GatherData
+#' @method GatherData seurat
+#' @return matrix
+#' @export
+GatherData.seurat <- function(object,
+                              assay = "RNA",
+                              slot.use = "data",
+                              ...){
+  obj_data <- GetAssayData(object = object, 
+                           assay = assay,
+                           slot = slot.use) %>%
+    as.matrix()
+  return(obj_data)
+}
