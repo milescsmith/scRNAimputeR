@@ -7,7 +7,7 @@
 #'
 #' @param object Seurat object
 #' @param assay Assay from which the data to impute should come.  (default: "RNA")
-#' @param slot.use Slot to take data from. (default: "counts")
+#' @param slot_use Slot to take data from. (default: "counts")
 #' @param mode character. "denoise"(default), or "latent".  "denoise"
 #' overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
 #' adds "adata.obsm["X_dca"]" to given adata object. This matrix represent
@@ -73,7 +73,7 @@
 
 dca <- function(object,
                 assay = "RNA",
-                slot.use = "counts",
+                slot_use = "counts",
                 mode = 'denoise',
                 ae_type = 'zinb-conddisp',
                 normalize_per_cell = TRUE,
@@ -109,7 +109,7 @@ dca <- function(object,
     threads <- detectCores()
   }
 
-  exprDat <- GatherData(object, assay, slot.use) %>% t()
+  exprDat <- GatherData(object, assay, slot_use) %>% t()
   dca.module <- import(module = 'dca.api', delay_load = TRUE)
   scanpy.module <- import(module = 'scanpy.api', delay_load = TRUE)
 
@@ -149,7 +149,7 @@ dca <- function(object,
   colnames(conv) <- adata$obs_names$values
   rownames(conv) <- adata$var_names$values
   object <- PlaceData(object = object,
-                      assay.store = "dca",
+                      assay_store = "dca",
                       imputed_data = conv)
   return(object)
 }

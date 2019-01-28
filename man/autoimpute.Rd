@@ -4,11 +4,11 @@
 \alias{autoimpute}
 \title{AutoImpute}
 \usage{
-autoimpute(object, assay = "RNA", slot.use = "data",
-  assay.store = "RNA", slot.store = "data", normalize.data = FALSE,
-  scale.data = TRUE, debug = TRUE, debug_display_step = 1,
-  hidden_units = 2000, lambda_val = 1, initial_learning_rate = 1e-04,
-  iterations = 7000, threshold = 1e-04, masked_matrix_test = FALSE,
+autoimpute(object, assay = "RNA", slot_use = "data",
+  assay_store = "RNA", normalize.data = FALSE, scale.data = TRUE,
+  debug = TRUE, debug_display_step = 1, hidden_units = 2000,
+  lambda_val = 1, initial_learning_rate = 1e-04, iterations = 7000,
+  threshold = 1e-04, masked_matrix_test = FALSE,
   masking_percentage = 10, log_file = "log.txt", load_saved = FALSE)
 }
 \arguments{
