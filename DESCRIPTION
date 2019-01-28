@@ -6,7 +6,10 @@ Authors@R:
            family = "Smith",
            role = c("aut", "cre"),
            email = "mileschristiansmith@gmail.com")
-Description: Collects scRNAseq imputation algorithms and provides functions for interfacing with Seurat objects..Depends: 
+Description: Collects scRNAseq imputation algorithms and 
+    provides functions for interfacing with Seurat and 
+    SingleCellExperiment objects.
+Depends: 
     R (>= 3.5.0),
     Seurat (>= 2.3.4),
     Matrix,
@@ -14,7 +17,9 @@ Description: Collects scRNAseq imputation algorithms and provides functions for 
     magrittr (>= 1.5),
     reticulate (>= 1.10),
     parallel,
-    ALRA
+    ALRA,
+    Rmagic,
+    SingleCellExperiment
 Remotes:
     github::milescsmith/ALRA
 License: BSD

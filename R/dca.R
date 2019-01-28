@@ -9,57 +9,57 @@
 #' @param assay Assay from which the data to impute should come.  (default: "RNA")
 #' @param slot.use Slot to take data from. (default: "counts")
 #' @param mode character. "denoise"(default), or "latent".  "denoise"
-#'   overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
-#'   adds "adata.obsm["X_dca"]" to given adata object. This matrix represent
-#'   latent representation of cells via DCA.
+#' overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
+#' adds "adata.obsm["X_dca"]" to given adata object. This matrix represent
+#' latent representation of cells via DCA.
 #' @param ae_type character. "zinb-conddisp"(default), "zinb",
-#'   "nb-conddisp" or "nb".  Type of the autoencoder. Return values and the
-#'   architecture is determined by the type e.g. "nb" does not provide dropout
-#'   probabilities.
+#' "nb-conddisp" or "nb".  Type of the autoencoder. Return values and the
+#' architecture is determined by the type e.g. "nb" does not provide dropout
+#' probabilities.
 #' @param normalize_per_cell boolean (default: TRUE).  If true,
-#'   library size normalization is performed using the
-#'   "sc.pp.normalize_per_cell" function in Scanpy and saved into adata object.
-#'   Mean layer is re-introduces library size differences by scaling the mean
-#'   value of each cell in the output layer. See the manuscript for more
-#'   details.
+#' library size normalization is performed using the
+#' "sc.pp.normalize_per_cell" function in Scanpy and saved into adata object.
+#' Mean layer is re-introduces library size differences by scaling the mean
+#' value of each cell in the output layer. See the manuscript for more
+#' details.
 #' @param scale boolean (default: TRUE).  If true, the input of the
-#'   autoencoder is centered using "sc.pp.scale" function of Scanpy. Note that
-#'   the output is kept as raw counts as loss functions are designed for the
-#'   count data.
+#' autoencoder is centered using "sc.pp.scale" function of Scanpy. Note that
+#' the output is kept as raw counts as loss functions are designed for the
+#' count data.
 #' @param log1p boolean (default: TRUE).  If true, the input of the
-#'   autoencoder is log transformed with a pseudocount of one using
-#'   "sc.pp.log1p" function of Scanpy.
+#' autoencoder is log transformed with a pseudocount of one using
+#' "sc.pp.log1p" function of Scanpy.
 #' @param batchnorm boolean (default: TRUE).  If true, batch
-#'   normalization is performed.
+#' normalization is performed.
 #' @param activation str (default: "relu").  Activation function of
-#'   hidden layers.
+#' hidden layers.
 #' @param init str (default: "glorot_uniform").  Initialization
-#'   method used to initialize weights.
+#' method used to initialize weights.
 #' @param epochs integer (default: 300).  Number of total epochs in
-#'   training.
+#' training.
 #' @param reduce_lr integer (default: 10).  Reduces learning rate if
-#'   validation loss does not improve in given number of epochs.
+#' validation loss does not improve in given number of epochs.
 #' @param early_stop integer (default: 15).  Stops training if
-#'   validation loss does not improve in given number of epochs.
+#' validation loss does not improve in given number of epochs.
 #' @param batch_size integer (default: 32).  Number of samples in the
-#'   batch used for SGD.
+#' batch used for SGD.
 #' @param optimizer str (default: "rmsprop").  Type of optimization
-#'   method used for training.
+#' method used for training.
 #' @param random_state integer (default: 0).  Seed for python, numpy
-#'   and tensorflow.
+#' and tensorflow.
 #' @param threads integer or NULL (default: NULL).  Number of threads
-#'   to use in training. All cores are used by default.
+#' to use in training. All cores are used by default.
 #' @param verbose boolean (default: FALSE).  If true, prints
-#'   additional information about training and architecture.
+#' additional information about training and architecture.
 #' @param return_model boolean (default: FALSE).  If true, trained
-#'   autoencoder object is returned. See "Returns".
+#' autoencoder object is returned. See "Returns".
 #' @param return_info boolean (default: FALSE).  If true, all
-#'   additional parameters of DCA are stored in "adata.obsm" such as dropout
-#'   probabilities (obsm["X_dca_dropout"]) and estimated dispersion values
-#'   (obsm["X_dca_dispersion"]), in case that autoencoder is of type zinb or
-#'   zinb-conddisp.
+#' additional parameters of DCA are stored in "adata.obsm" such as dropout
+#' probabilities (obsm["X_dca_dropout"]) and estimated dispersion values
+#' (obsm["X_dca_dispersion"]), in case that autoencoder is of type zinb or
+#' zinb-conddisp.
 #' @param copy boolean (default: FALSE). If true, a copy of anndata
-#'   is returned.
+#' is returned.
 #'
 #' @importFrom reticulate import py_module_available dict
 #' @importFrom parallel detectCores
@@ -71,7 +71,7 @@
 #'
 #' @examples
 
-dca <- function(object = object,
+dca <- function(object,
                 assay = "RNA",
                 slot.use = "counts",
                 mode = 'denoise',
