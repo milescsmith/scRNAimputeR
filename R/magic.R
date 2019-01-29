@@ -24,7 +24,7 @@ Magic <- function(object, ...) {
 }
 
 #' @rdname Magic
-#' @method Magic matrix
+#' @method Magic default
 #' 
 #' @param exprDat
 #' 

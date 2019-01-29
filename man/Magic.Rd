@@ -10,7 +10,7 @@
 \usage{
 Magic(object, ...)
 
-\method{Magic}{matrix}(exprDat, genes = NULL, k = 10, alpha = 15,
+\method{Magic}{default}(exprDat, genes = NULL, k = 10, alpha = 15,
   t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
   seed = NULL)
