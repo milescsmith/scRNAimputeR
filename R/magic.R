@@ -106,7 +106,7 @@ Magic.Seurat <- function(object,
 
   exprDat <- GatherData(object, assay_use, slot_use) %>% t()
 
-  magic.result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
+  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
                         t.max,knn.dist.method, verbose, n.jobs,seed)
   
   object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
@@ -138,7 +138,7 @@ Magic.seurat <- function(object,
   
   exprDat <- GatherData(object, slot_use) %>% t()
 
-  magic.result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
+  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
                         t.max,knn.dist.method, verbose, n.jobs,seed)
   
   object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
@@ -170,7 +170,7 @@ Magic.SingleCellExperiment <- function(object,
   
   exprDat <- GatherData(object, assay_use) %>% t()
   
-  magic.result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
+  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
                         t.max,knn.dist.method, verbose, n.jobs,seed)
   
   object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
