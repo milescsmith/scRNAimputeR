@@ -29,9 +29,8 @@
 #' @examples
 autoimpute <- function(object,
                        assay = 'RNA',
-                       slot.use = 'data',
-                       assay.store = "RNA",
-                       slot.store = "data",
+                       slot_use = 'data',
+                       assay_store = "RNA",
                        normalize.data = FALSE,
                        scale.data = TRUE,
                        debug = TRUE, 
@@ -55,7 +54,7 @@ autoimpute <- function(object,
     }
   }
   
-  exprDat <- GatherData(object, assay, slot.use)
+  exprDat <- GatherData(object, assay, slot_use)
   ai.module <- import(module = 'AutoImpute', delay_load = TRUE)
   
   exprDat %<>% t()
@@ -78,7 +77,7 @@ autoimpute <- function(object,
   colnames(ai_data) <- cell.names
   rownames(ai_data) <- glue("AI_{gene.names}")
   object <- PlaceData(object = object,
-                      assay.store = "autoimpute", 
+                      assay_store = "autoimpute", 
                       imputed_data = ai_data)
   return(object)
 }
