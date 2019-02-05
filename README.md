@@ -5,10 +5,10 @@ Currently, only the following work:
  * [ALRA](https://github.com/KlugerLab/ALRA/), though you can find this as an installable R package [here](https://github.com/milescsmith/ALRA/)
  * [AutoImpute](https://github.com/divyanshu-talwar/AutoImpute), though like above, you can find an installable Python package [here](https://github.com/milescsmith/AutoImpute)
  * [DCA](https://github.com/theislab/dca)
+ * [MAGIC](https://github.com/KrishnaswamyLab/MAGIC)
  
  The following are others I'm aware of and planning to include:
  * [scImpute](https://github.com/Vivianstats/scImpute)
- * [MAGIC](https://github.com/KrishnaswamyLab/MAGIC)
  * [scvi](https://github.com/YosefLab/scVI)
  * [DECODE](https://github.com/shmohammadi86/NetImpute)
  * [DrImpute](https://github.com/gongx030/DrImpute)
