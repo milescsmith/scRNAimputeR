@@ -1,26 +1,29 @@
-#' AutoImpute
+#' @title AutoImpute
 #'
-#' AutoImpute is an auto-encoder based gene-expression (sparse) matrix imputation.
+#' @description AutoImpute is an auto-encoder based gene-expression (sparse) matrix imputation.
 #' (https://github.com/divyanshu-talwar/AutoImpute)
-#' Some arguments have been removed due to being troublesome in the R-Python
-#' interface
 #'
-#'
-#' @param exprData 
-#' @param debug 
-#' @param debug_display_step 
-#' @param hidden_units 
-#' @param lambda_val 
-#' @param initial_learning_rate 
-#' @param iterations 
-#' @param threshold 
-#' @param masked_matrix_test 
-#' @param masking_percentage 
-#' @param log_file 
-#' @param load_saved 
+#' @param debug To print and save debug statements (loss function value). Default: TRUE
+#' @param debug_display_step Number of steps to display loss function value after. Default: TRUE
+#' @param hidden_units Size of hidden layer or latent space dimensions. Default: 2000
+#' @param lambda_val Regularization coefficient, to control the contribution of 
+#' regularization term in the cost function. Default: 1
+#' @param initial_learning_rate Initial value of learning rate. Default: 0.0001
+#' @param iterations Number of iterations to train the model for. Default: 7000
+#' @param threshold To stop gradient descent after the change in loss function 
+#' value in consecutive iterations is less than the threshold, 
+#' implying convergence. Default: 0.0001
+#' @param masked_matrix_test Run the masked matrix recovery test? Default: FALSE
+#' @param masking_percentage Percentage of masking required. Like 10, 20, 12.5 etc. Default: 10
+#' @param log_file Text file to save training logs. Default: log.txt
+#' @param load_saved Flag to indicate if a saved model will be loaded. Default: FALSE
+#' @param object Data object to impute
+#' @param assay Assay to take data from
+#' @param slot_use Slot within assay to take data from
+#' @param normalize_data Should the data be normalized after imputation?
+#' @param scale_data Should the data be scaled after imputation?
 #'
 #' @importFrom reticulate import py_module_available
-#' @importFrom magrittr %<>% %>%
 #' @importFrom glue glue
 #'
 #' @return
@@ -30,9 +33,8 @@
 autoimpute <- function(object,
                        assay = 'RNA',
                        slot_use = 'data',
-                       assay_store = "RNA",
-                       normalize.data = FALSE,
-                       scale.data = TRUE,
+                       normalize_data = FALSE,
+                       scale_data = TRUE,
                        debug = TRUE, 
                        debug_display_step = 1, 
                        hidden_units = 2000, 

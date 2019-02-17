@@ -36,7 +36,9 @@ Magic(object, ...)
 \arguments{
 \item{object}{Seurat object with data to impute by MAGIC.}
 
-\item{exprDat}{}
+\item{...}{Additional arguments}
+
+\item{exprDat}{expression matrix to impute}
 
 \item{genes}{Default: NULL}
 
@@ -60,21 +62,9 @@ Magic(object, ...)
 
 \item{seed}{Default: NULL}
 
-\item{assay_use}{Object assay containing the data to impute. Default: "RNA"}
+\item{assay_use}{Object assay containing the data to impute. Default: "RNA" or "logcounts"}
 
 \item{slot_use}{Assay slot containing data to impute. Default: "counts"}
-
-\item{assay_store}{Name to use when storing imputed data. Default: "magic"}
-
-\item{object}{Seurat object with data to impute by MAGIC.}
-
-\item{slot_use}{Data slot containing data to impute. Default: "counts"}
-
-\item{assay_store}{Name to use when storing imputed data. Default: "magic"}
-
-\item{object}{SingleCellExperiment object with data to impute by MAGIC.}
-
-\item{assay_use}{Object assay containing the data to impute. Default: "logcounts"}
 
 \item{assay_store}{Name to use when storing imputed data. Default: "magic"}
 }

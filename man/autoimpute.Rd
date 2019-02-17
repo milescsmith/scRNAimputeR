@@ -5,40 +5,49 @@
 \title{AutoImpute}
 \usage{
 autoimpute(object, assay = "RNA", slot_use = "data",
-  assay_store = "RNA", normalize.data = FALSE, scale.data = TRUE,
-  debug = TRUE, debug_display_step = 1, hidden_units = 2000,
-  lambda_val = 1, initial_learning_rate = 1e-04, iterations = 7000,
+  normalize_data = FALSE, scale_data = TRUE, debug = TRUE,
+  debug_display_step = 1, hidden_units = 2000, lambda_val = 1,
+  initial_learning_rate = 1e-04, iterations = 7000,
   threshold = 1e-04, masked_matrix_test = FALSE,
   masking_percentage = 10, log_file = "log.txt", load_saved = FALSE)
 }
 \arguments{
-\item{debug}{}
+\item{object}{Data object to impute}
 
-\item{debug_display_step}{}
+\item{assay}{Assay to take data from}
 
-\item{hidden_units}{}
+\item{slot_use}{Slot within assay to take data from}
 
-\item{lambda_val}{}
+\item{normalize_data}{Should the data be normalized after imputation?}
 
-\item{initial_learning_rate}{}
+\item{scale_data}{Should the data be scaled after imputation?}
 
-\item{iterations}{}
+\item{debug}{To print and save debug statements (loss function value). Default: TRUE}
 
-\item{threshold}{}
+\item{debug_display_step}{Number of steps to display loss function value after. Default: TRUE}
 
-\item{masked_matrix_test}{}
+\item{hidden_units}{Size of hidden layer or latent space dimensions. Default: 2000}
 
-\item{masking_percentage}{}
+\item{lambda_val}{Regularization coefficient, to control the contribution of
+regularization term in the cost function. Default: 1}
 
-\item{log_file}{}
+\item{initial_learning_rate}{Initial value of learning rate. Default: 0.0001}
 
-\item{load_saved}{}
+\item{iterations}{Number of iterations to train the model for. Default: 7000}
 
-\item{exprData}{}
+\item{threshold}{To stop gradient descent after the change in loss function
+value in consecutive iterations is less than the threshold,
+implying convergence. Default: 0.0001}
+
+\item{masked_matrix_test}{Run the masked matrix recovery test? Default: FALSE}
+
+\item{masking_percentage}{Percentage of masking required. Like 10, 20, 12.5 etc. Default: 10}
+
+\item{log_file}{Text file to save training logs. Default: log.txt}
+
+\item{load_saved}{Flag to indicate if a saved model will be loaded. Default: FALSE}
 }
 \description{
 AutoImpute is an auto-encoder based gene-expression (sparse) matrix imputation.
 (https://github.com/divyanshu-talwar/AutoImpute)
-Some arguments have been removed due to being troublesome in the R-Python
-interface
 }

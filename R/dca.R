@@ -10,7 +10,7 @@
 #' @param slot_use Slot to take data from. (default: "counts")
 #' @param mode character. "denoise"(default), or "latent".  "denoise"
 #' overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
-#' adds "adata.obsm["X_dca"]" to given adata object. This matrix represent
+#' adds "adata.obsm\['X_dca'\]" to given adata object. This matrix represent
 #' latent representation of cells via DCA.
 #' @param ae_type character. "zinb-conddisp"(default), "zinb",
 #' "nb-conddisp" or "nb".  Type of the autoencoder. Return values and the
@@ -55,8 +55,8 @@
 #' autoencoder object is returned. See "Returns".
 #' @param return_info boolean (default: FALSE).  If true, all
 #' additional parameters of DCA are stored in "adata.obsm" such as dropout
-#' probabilities (obsm["X_dca_dropout"]) and estimated dispersion values
-#' (obsm["X_dca_dispersion"]), in case that autoencoder is of type zinb or
+#' probabilities (obsm\["X_dca_dropout"\]) and estimated dispersion values
+#' (obsm\["X_dca_dispersion"\]), in case that autoencoder is of type zinb or
 #' zinb-conddisp.
 #' @param copy boolean (default: FALSE). If true, a copy of anndata
 #' is returned.
@@ -64,7 +64,6 @@
 #' @importFrom reticulate import py_module_available dict
 #' @importFrom parallel detectCores
 #' @importFrom glue glue
-#' @importFrom magrittr "%>%"
 #'
 #' @return A Seurat object with imputed data stored in an assay slot named 'dca'
 #' @export
