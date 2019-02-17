@@ -17,11 +17,16 @@ Depends:
     magrittr (>= 1.5),
     reticulate (>= 1.10),
     parallel,
-    ALRA,
-    Rmagic,
-    SingleCellExperiment
+    SingleCellExperiment,
+    SummarizedExperiment,
+    scater,
+    ensembldb,
+    EnsDb.Hsapiens.v86,
+    dplyr,
+    tibble
 Remotes:
     github::milescsmith/ALRA
+    github::milescsmith/scImpute
 License: BSD
 Encoding: UTF-8
 LazyData: true

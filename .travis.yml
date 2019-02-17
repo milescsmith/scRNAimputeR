@@ -1,0 +1,58 @@
+language: r
+r:
+  - release
+cache: packages
+
+dist: xenial
+
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - deadsnakes
+    packages:
+      - python3.6
+      - python3.6-dev
+      - libgit2-dev
+      - libhdf5-dev
+      - libtool
+  homebrew:
+    packages:
+      - cmake
+      - python3
+      - gcc
+
+env:
+  global:
+    - PYTHON=python3.6
+
+before_install:
+  - $PYTHON --version
+  - curl https://bootstrap.pypa.io/get-pip.py | sudo -H $PYTHON
+  - sudo $PYTHON -m pip install --upgrade pip
+  - pip install --user numpy, keras, h5py, six, scikit-learn, scanpy, kopt, pandas
+  - pip install --user dca
+  - pip install --user magic-impute
+  - pip install --user git+https://github.com/milescsmith/AutoImpute.git
+  
+r_packages:
+  - reticulate
+  - parallel
+  - glue
+  - magrittr
+  - Matrix
+  - parallel
+  - tidyverse
+  
+bioc_packages:
+  - SingleCellExperiment
+  - GenomeInfoDbData
+  - S4Vectors
+  - SummarizedExperiment
+  - ensembldb,
+  - EnsDb.Hsapiens.v86
+
+Remotes: satijalab/Seurat@release/3.0
+    milescsmith/ALRA
+    milescsmith/scImpute

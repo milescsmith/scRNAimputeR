@@ -3,6 +3,11 @@
 #' Wrapper around the Markov Affinity-based Graph Imputation of Cells (MAGIC) 
 #' imputation algorithm from the KrishnaswamyLab
 #'
+#' @param exprDat expression matrix to impute
+#' @param object Seurat object with data to impute by MAGIC.
+#' @param assay_use Object assay containing the data to impute. Default: "RNA" or "logcounts"
+#' @param slot_use Assay slot containing data to impute. Default: "counts"
+#' @param assay_store Name to use when storing imputed data. Default: "magic"
 #' @param genes Default: NULL
 #' @param k Default: 10
 #' @param alpha Default: 15
@@ -14,6 +19,7 @@
 #' @param verbose Default: 1
 #' @param n.jobs Default: 1
 #' @param seed Default: NULL
+#' @param ... Additional arguments
 #'
 #' @return
 #' @export
@@ -25,8 +31,6 @@ Magic <- function(object, ...) {
 
 #' @rdname Magic
 #' @method Magic default
-#' 
-#' @param exprDat
 #' 
 #' @importFrom reticulate py_module_available import
 #' @importFrom glue glue
@@ -80,12 +84,6 @@ Magic.default <- function(exprDat,
 
 #' @rdname Magic
 #' @method Magic Seurat
-#' 
-#' @param object Seurat object with data to impute by MAGIC.
-#' @param assay_use Object assay containing the data to impute. Default: "RNA"
-#' @param slot_use Assay slot containing data to impute. Default: "counts"
-#' @param assay_store Name to use when storing imputed data. Default: "magic"
-#' 
 #' @return Seurat object
 #' @export
 Magic.Seurat <- function(object,
@@ -114,11 +112,6 @@ Magic.Seurat <- function(object,
 
 #' @rdname Magic
 #' @method Magic seurat
-#' 
-#' @param object Seurat object with data to impute by MAGIC.
-#' @param slot_use Data slot containing data to impute. Default: "counts"
-#' @param assay_store Name to use when storing imputed data. Default: "magic"
-#' 
 #' @return seurat object
 #' @export
 Magic.seurat <- function(object,
@@ -146,11 +139,6 @@ Magic.seurat <- function(object,
 
 #' @rdname Magic
 #' @method Magic SingleCellExperiment
-#' 
-#' @param object SingleCellExperiment object with data to impute by MAGIC.
-#' @param assay_use Object assay containing the data to impute. Default: "logcounts"
-#' @param assay_store Name to use when storing imputed data. Default: "magic"
-#' 
 #' @return SingleCellExperiment object
 #' @export
 Magic.SingleCellExperiment <- function(object,

@@ -21,7 +21,7 @@ dca(object, assay = "RNA", slot_use = "counts", mode = "denoise",
 
 \item{mode}{character. "denoise"(default), or "latent".  "denoise"
 overwrites "adata.X" with denoised expression values.  In "latent" mode DCA
-adds "adata.obsm\link{"X_dca"}" to given adata object. This matrix represent
+adds "adata.obsm['X_dca']" to given adata object. This matrix represent
 latent representation of cells via DCA.}
 
 \item{ae_type}{character. "zinb-conddisp"(default), "zinb",
@@ -83,8 +83,8 @@ autoencoder object is returned. See "Returns".}
 
 \item{return_info}{boolean (default: FALSE).  If true, all
 additional parameters of DCA are stored in "adata.obsm" such as dropout
-probabilities (obsm\link{"X_dca_dropout"}) and estimated dispersion values
-(obsm\link{"X_dca_dispersion"}), in case that autoencoder is of type zinb or
+probabilities (obsm["X_dca_dropout"]) and estimated dispersion values
+(obsm["X_dca_dispersion"]), in case that autoencoder is of type zinb or
 zinb-conddisp.}
 
 \item{copy}{boolean (default: FALSE). If true, a copy of anndata
