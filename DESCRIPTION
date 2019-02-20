@@ -23,9 +23,11 @@ Depends:
     ensembldb,
     EnsDb.Hsapiens.v86,
     dplyr,
-    tibble
+    tibble,
+    ALRA,
+    scImpute
 Remotes:
-    github::milescsmith/ALRA
+    github::milescsmith/ALRA,
     github::milescsmith/scImpute
 License: BSD
 Encoding: UTF-8
