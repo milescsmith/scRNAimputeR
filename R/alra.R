@@ -16,14 +16,14 @@ ALRA <- function(object,
                  slot_use = "data", 
                  ...) {
   datExprs <- GatherData(object = object,
-                         assay = assay.use, 
-                         slot = slot.use) %>% t()
+                         assay = assay_use, 
+                         slot = slot_use) %>% t()
   alraExprs <- alra(datExprs, 
                     ...) %>% 
     '[['(3) %>%
     t()
-  colnames(alraExprs) <- colnames(datExprs)
-  rownames(alraExprs) <- rownames(datExprs)
+  colnames(alraExprs) <- rownames(datExprs)
+  rownames(alraExprs) <- colnames(datExprs)
   alraExprs <- Matrix(alraExprs, sparse = T)
   object <- PlaceData(object = object, 
                       assay_store = "ALRA", 
