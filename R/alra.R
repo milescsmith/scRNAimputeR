@@ -22,8 +22,8 @@ ALRA <- function(object,
                     ...) %>% 
     '[['(3) %>%
     t()
-  colnames(alraExprs) <- colnames(datExprs)
-  rownames(alraExprs) <- rownames(datExprs)
+  colnames(alraExprs) <- rownames(datExprs)
+  rownames(alraExprs) <- colnames(datExprs)
   alraExprs <- Matrix(alraExprs, sparse = T)
   object <- PlaceData(object = object, 
                       assay_store = "ALRA", 
