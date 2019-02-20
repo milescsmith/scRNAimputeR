@@ -16,8 +16,8 @@ ALRA <- function(object,
                  slot_use = "data", 
                  ...) {
   datExprs <- GatherData(object = object,
-                         assay = assay.use, 
-                         slot = slot.use) %>% t()
+                         assay = assay_use, 
+                         slot = slot_use) %>% t()
   alraExprs <- alra(datExprs, 
                     ...) %>% 
     '[['(3) %>%
