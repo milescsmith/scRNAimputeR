@@ -45,7 +45,7 @@ autoimpute <- function(object,
                        log_file = 'log.txt',
                        load_saved = FALSE){
   
-  required_modules <- c("AutoImpute", "numpy", "scipy", "tensorflow", "scikit-learn", "typing")
+  required_modules <- c("AutoImpute", "numpy", "scipy", "tensorflow", "sklearn", "typing")
   for (i in required_modules){
     if(!py_module_available(i)){
       stop(glue("The {i} module is unavailable.
