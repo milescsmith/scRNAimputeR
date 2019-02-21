@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/milescsmith/scRNAimputeR.svg?branch=master)](https://travis-ci.com/milescsmith/scRNAimputeR)
 # scRNAimputeR
 A effort to collect all of the scRNA imputation methods and allow them to interface with scRNA-seq libraries (i. e. Seurat, SingleCellAssay, etc...)
 
