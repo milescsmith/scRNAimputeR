@@ -50,7 +50,7 @@ bioc_packages:
   - GenomeInfoDbData
   - S4Vectors
   - SummarizedExperiment
-  - ensembldb,
+  - ensembldb
   - EnsDb.Hsapiens.v86
 
 Remotes: 
