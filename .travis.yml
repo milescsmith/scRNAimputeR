@@ -1,7 +1,9 @@
 language: r
 r:
   - release
-cache: packages
+cache: 
+  - packages
+  - pip
 
 dist: xenial
 
