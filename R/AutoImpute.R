@@ -57,7 +57,7 @@ autoimpute <- function(object,
   }
   
   exprDat <- GatherData(object, assay, slot_use)
-  ai.module <- import(module = 'AutoImpute', delay_load = TRUE)
+  ai <- import(module = 'AutoImpute', delay_load = TRUE)
   
   exprDat %<>% t()
   cell.names <- rownames(exprDat)
