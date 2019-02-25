@@ -74,7 +74,11 @@ autoimpute <- function(object,
                            masked_matrix_test = masked_matrix_test,
                            masking_percentage = as.integer(masking_percentage),
                            log_file = log_file ,
-                           load_saved = FALSE) %>% t()
+                           load_saved = FALSE) %>% 
+    t()  %>%
+    `[[`(1) %>%
+    `[[`(1) %>%
+    `[[`(1)
   
   colnames(ai_data) <- cellnames
   rownames(ai_data) <- genenames
