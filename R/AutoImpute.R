@@ -60,10 +60,10 @@ autoimpute <- function(object,
   ai <- import(module = 'AutoImpute', delay_load = TRUE)
   
   exprDat %<>% t()
-  cell.names <- rownames(exprDat)
-  gene.names <- colnames(exprDat)
+  cellnames <- rownames(exprDat)
+  genenames <- colnames(exprDat)
   
-  ai_data <- ai$AutoImpute$autoimpute(data = exprData, 
+  ai_data <- ai$AutoImpute$autoimpute(data = exprDat, 
                            debug = debug,
                            debug_display_step = as.integer(debug_display_step),
                            hidden_units = as.integer(hidden_units),
@@ -76,8 +76,8 @@ autoimpute <- function(object,
                            log_file = log_file ,
                            load_saved = FALSE) %>% t()
   
-  colnames(ai_data) <- cell.names
-  rownames(ai_data) <- glue("AI_{gene.names}")
+  colnames(ai_data) <- cellnames
+  rownames(ai_data) <- genenames
   object <- PlaceData(object = object,
                       assay_store = "autoimpute", 
                       imputed_data = ai_data)
