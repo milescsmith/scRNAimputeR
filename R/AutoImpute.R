@@ -63,7 +63,7 @@ autoimpute <- function(object,
   cell.names <- rownames(exprDat)
   gene.names <- colnames(exprDat)
   
-  ai_data <- ai$autoimpute(data = exprData, 
+  ai_data <- ai$AutoImpute$autoimpute(data = exprData, 
                            debug = debug,
                            debug_display_step = as.integer(debug_display_step),
                            hidden_units = as.integer(hidden_units),
