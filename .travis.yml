@@ -46,15 +46,10 @@ r_packages:
   - reticulate
   - parallel
   - glue
-  - magrittr
   - Matrix
-  - parallel
-  - tidyverse
   
 bioc_packages:
   - SingleCellExperiment
-  - GenomeInfoDbData
-  - S4Vectors
   - SummarizedExperiment
   - ensembldb
   - EnsDb.Hsapiens.v86
