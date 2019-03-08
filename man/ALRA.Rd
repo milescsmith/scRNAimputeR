@@ -13,7 +13,7 @@ ALRA(object, assay_use = "RNA", slot_use = "data", ...)
 
 \item{slot_use}{The slot within the assay to impute. Default: "data"}
 
-\item{...}{additional parameters to pass to ALRA::alra()}
+\item{...}{additional parameters to pass to \code{\link{alra}}}
 }
 \description{
 Use Adaptively-thresholded Low Rank Approximation to perform imputation

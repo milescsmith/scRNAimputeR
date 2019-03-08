@@ -13,7 +13,8 @@ RetrieveIdents(object, ...)
 
 \method{RetrieveIdents}{seurat}(object, identity = NULL, ...)
 
-\method{RetrieveIdents}{SingleCellExperiment}(object, identity = NULL)
+\method{RetrieveIdents}{SingleCellExperiment}(object, identity = NULL,
+  ...)
 }
 \arguments{
 \item{object}{Data object from which to retrieve identiy information}

@@ -11,14 +11,10 @@
 #' @param ident_use Identity variable to use when imputing the data.
 #' @param ensembl_db The Ensembl annotation package to use to compute gene lengths. 
 #' Default: EnsDb.Hsapiens.v86
-#' @param ... Additional arguments to pass to scImpute::scimpute
-#'
-#' @return
-#' @export
-#'
+#' @param ... Additional arguments to pass to \code{\link{scImpute}}
+#' 
 #' @importFrom EnsDb.Hsapiens.v86 EnsDb.Hsapiens.v86
-#'
-#' @examples
+#' @importFrom scImpute scimpute
 #' 
 #' @return Seurat
 #' @export
@@ -59,13 +55,14 @@ scImpute <- function(object,
 
 #' @importFrom ensembldb cdsBy
 #' @importFrom dplyr select mutate group_by top_n distinct
+#' @importFrom AnnotationFilter GeneNameFilter
 #' @importFrom tibble as_tibble
 getGeneLengths <- function(genes, edb = NULL){
   if (is.null(edb)){
     stop("Must specify the Ensembl annotation package appropriate for your species")
   }
   
-  txs <- cdsBy(edb, filter = GenenameFilter(genes)) %>% 
+  txs <- cdsBy(edb, filter = GeneNameFilter(genes)) %>% 
     unlist() %>%
     as_tibble() %>%
     mutate(length = end - start) %>%

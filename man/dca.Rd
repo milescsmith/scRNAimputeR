@@ -94,8 +94,8 @@ is returned.}
 A Seurat object with imputed data stored in an assay slot named 'dca'
 }
 \description{
-Performs denoising of gene expression using dca
-(https://github.com/theislab/dca)
+Performs denoising of gene expression using
+\href{https://github.com/theislab/dca}{DCA}
 Some arguments have been removed due to being troublesome in the R-Python
 interface
 }

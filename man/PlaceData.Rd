@@ -10,17 +10,17 @@
 PlaceData(object, ...)
 
 \method{PlaceData}{Seurat}(object, assay_store = "new_assay",
-  imputed_data, normalize = "FALSE", scale = "FALSE")
+  imputed_data, normalize = "FALSE", scale = "FALSE", ...)
 
 \method{PlaceData}{seurat}(object, assay_store = "new_assay",
   slot_use = "data", imputed_data, normalize = "FALSE",
-  scale = "FALSE")
+  scale = "FALSE", ...)
 
 \method{PlaceData}{SingleCellExperiment}(object,
-  assay_store = "new_assay", imputed_data, normalize = "FALSE")
+  assay_store = "new_assay", imputed_data, normalize = "FALSE", ...)
 }
 \arguments{
-\item{object}{Seurat object to pull data from}
+\item{object}{Data object to pull data from}
 
 \item{...}{Additional arguments}
 
@@ -31,6 +31,8 @@ PlaceData(object, ...)
 \item{normalize}{Should the imputed data be normalized?}
 
 \item{scale}{Should the imputed data be scaled?}
+
+\item{slot_use}{Assay slot to pull data from}
 }
 \description{
 PlaceData

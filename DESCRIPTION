@@ -17,7 +17,6 @@ Depends:
     magrittr (>= 1.5),
     reticulate (>= 1.10),
     parallel,
-    SingleCellExperiment,
     SummarizedExperiment,
     scater,
     ensembldb,
@@ -25,11 +24,14 @@ Depends:
     dplyr,
     tibble,
     ALRA,
-    scImpute
+    scImpute,
+    AnnotationFilter
 Remotes:
     github::milescsmith/ALRA,
     github::milescsmith/scImpute
-License: BSD
+Suggests:
+    SingleCellExperiment
+License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

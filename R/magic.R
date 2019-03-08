@@ -3,8 +3,7 @@
 #' Wrapper around the Markov Affinity-based Graph Imputation of Cells (MAGIC) 
 #' imputation algorithm from the KrishnaswamyLab
 #'
-#' @param exprDat expression matrix to impute
-#' @param object Seurat object with data to impute by MAGIC.
+#' @param object Data object to impute by MAGIC.
 #' @param assay_use Object assay containing the data to impute. Default: "RNA" or "logcounts"
 #' @param slot_use Assay slot containing data to impute. Default: "counts"
 #' @param assay_store Name to use when storing imputed data. Default: "magic"
@@ -37,7 +36,7 @@ Magic <- function(object, ...) {
 #' 
 #' @return matrix
 #' @export
-Magic.default <- function(exprDat,
+Magic.default <- function(object,
                           genes = NULL, 
                           k = 10, 
                           alpha = 15, 
@@ -48,7 +47,8 @@ Magic.default <- function(exprDat,
                           knn.dist.method = "euclidean", 
                           verbose = 1, 
                           n.jobs = 1,
-                          seed = NULL){
+                          seed = NULL,
+                          ...){
   
   required_modules <- c("magic")
   for (i in required_modules){
@@ -61,10 +61,10 @@ Magic.default <- function(exprDat,
   
   magic.module <- import(module = 'magic', delay_load = TRUE)
   
-  exprDat %<>% as.data.frame()
+  object %<>% as.data.frame()
   
   if (is.null(genes)) {
-    genes <- colnames(exprDat)
+    genes <- colnames(object)
   }
   
   magic_operator <- magic.module$MAGIC(k = as.integer(k), 
@@ -76,7 +76,7 @@ Magic.default <- function(exprDat,
                                        random_state = seed, 
                                        verbose = verbose)
   
-  magic_result <- magic_operator$fit_transform(X = exprDat, 
+  magic_result <- magic_operator$fit_transform(X = object, 
                                                genes = genes, 
                                                t_max = t.max)
   return(magic_result)
@@ -100,7 +100,8 @@ Magic.Seurat <- function(object,
                          knn.dist.method = "euclidean", 
                          verbose = 1, 
                          n.jobs = 1,
-                         seed = NULL){
+                         seed = NULL,
+                         ...){
 
   exprDat <- GatherData(object, assay_use, slot_use) %>% t()
 
@@ -127,7 +128,8 @@ Magic.seurat <- function(object,
                          knn.dist.method = "euclidean", 
                          verbose = 1, 
                          n.jobs = 1,
-                         seed = NULL){
+                         seed = NULL,
+                         ...){
   
   exprDat <- GatherData(object, slot_use) %>% t()
 
@@ -154,7 +156,8 @@ Magic.SingleCellExperiment <- function(object,
                                        knn.dist.method = "euclidean", 
                                        verbose = 1, 
                                        n.jobs = 1,
-                                       seed = NULL){
+                                       seed = NULL,
+                                       ...){
   
   exprDat <- GatherData(object, assay_use) %>% t()
   

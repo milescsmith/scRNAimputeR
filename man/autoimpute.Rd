@@ -48,6 +48,6 @@ implying convergence. Default: 0.0001}
 \item{load_saved}{Flag to indicate if a saved model will be loaded. Default: FALSE}
 }
 \description{
-AutoImpute is an auto-encoder based gene-expression (sparse) matrix imputation.
-(https://github.com/divyanshu-talwar/AutoImpute)
+\href{https://github.com/divyanshu-talwar/AutoImpute}{AutoImpute} is an
+auto-encoder based gene-expression (sparse) matrix imputation.
 }

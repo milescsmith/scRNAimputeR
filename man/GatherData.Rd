@@ -9,11 +9,14 @@
 \usage{
 GatherData(object, ...)
 
-\method{GatherData}{Seurat}(object, assay = "RNA", slot_use = "counts")
+\method{GatherData}{Seurat}(object, assay = "RNA", slot_use = "counts",
+  ...)
 
-\method{GatherData}{seurat}(object, assay = "RNA", slot_use = "data")
+\method{GatherData}{seurat}(object, assay = "RNA", slot_use = "data",
+  ...)
 
-\method{GatherData}{SingleCellExperiment}(object, assay = "logcounts")
+\method{GatherData}{SingleCellExperiment}(object, assay = "logcounts",
+  ...)
 }
 \arguments{
 \item{object}{Seurat object to pull data from}

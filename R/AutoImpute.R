@@ -1,7 +1,7 @@
 #' @title AutoImpute
 #'
-#' @description AutoImpute is an auto-encoder based gene-expression (sparse) matrix imputation.
-#' (https://github.com/divyanshu-talwar/AutoImpute)
+#' @description \href{https://github.com/divyanshu-talwar/AutoImpute}{AutoImpute} is an 
+#' auto-encoder based gene-expression (sparse) matrix imputation.
 #'
 #' @param debug To print and save debug statements (loss function value). Default: TRUE
 #' @param debug_display_step Number of steps to display loss function value after. Default: TRUE

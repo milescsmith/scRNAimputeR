@@ -10,35 +10,33 @@
 \usage{
 Magic(object, ...)
 
-\method{Magic}{default}(exprDat, genes = NULL, k = 10, alpha = 15,
+\method{Magic}{default}(object, genes = NULL, k = 10, alpha = 15,
   t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
-  seed = NULL)
+  seed = NULL, ...)
 
 \method{Magic}{Seurat}(object, assay_use = "RNA", slot_use = "counts",
   assay_store = "magic", genes = NULL, k = 10, alpha = 15,
   t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
-  seed = NULL)
+  seed = NULL, ...)
 
 \method{Magic}{seurat}(object, slot_use = "data",
   assay_store = "magic", genes = NULL, k = 10, alpha = 15,
   t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
-  seed = NULL)
+  seed = NULL, ...)
 
 \method{Magic}{SingleCellExperiment}(object, assay_use = "logcounts",
   assay_store = "magic", genes = NULL, k = 10, alpha = 15,
   t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
-  seed = NULL)
+  seed = NULL, ...)
 }
 \arguments{
-\item{object}{Seurat object with data to impute by MAGIC.}
+\item{object}{Data object to impute by MAGIC.}
 
 \item{...}{Additional arguments}
-
-\item{exprDat}{expression matrix to impute}
 
 \item{genes}{Default: NULL}
 
