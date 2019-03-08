@@ -1,6 +1,6 @@
 language: r
 r:
-  - release
+  - bioc-release
 cache: 
   - packages
   directories:
