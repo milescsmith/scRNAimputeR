@@ -1,9 +1,12 @@
 language: r
 r:
-  - release
+  - bioc-release
 cache: 
   - packages
-  - pip
+  directories:
+    - $HOME/.cache/pip
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
 
 dist: xenial
 
