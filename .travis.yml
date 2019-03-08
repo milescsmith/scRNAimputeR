@@ -23,6 +23,7 @@ addons:
       - libgit2-dev
       - libhdf5-dev
       - libtool
+      - texinfo
 
 env:
   global:
