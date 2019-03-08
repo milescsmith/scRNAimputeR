@@ -1,9 +1,10 @@
 language: r
 r:
   - bioc-release
-cache: 
-  - packages
-  - pip
+cache:
+  directories:
+  - $HOME/.cache/pip
+  - $HOME/R/Library
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
