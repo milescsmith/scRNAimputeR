@@ -17,18 +17,16 @@ Depends:
     magrittr (>= 1.5),
     reticulate (>= 1.10),
     parallel,
-    SummarizedExperiment,
-    scater,
-    ensembldb,
-    EnsDb.Hsapiens.v86,
     dplyr,
-    tibble,
-    ALRA,
-    scImpute,
-    AnnotationFilter
+    tibble
 Remotes:
     github::milescsmith/ALRA,
-    github::milescsmith/scImpute
+    github::milescsmith/scImpute,
+    bioc::3.8/SummarizedExperiment,
+    bioc::3.8/scater,
+    bioc::3.8/ensembldb,
+    bioc::3.8/EnsDb.Hsapiens.v86,
+    bioc::3.8/AnnotationFilter
 Suggests:
     SingleCellExperiment
 License: BSD_3_clause + file LICENSE
