@@ -23,11 +23,6 @@ addons:
       - libgit2-dev
       - libhdf5-dev
       - libtool
-  homebrew:
-    packages:
-      - cmake
-      - python3
-      - gcc
 
 env:
   global:
@@ -41,20 +36,8 @@ before_install:
   - pip install --user dca
   - pip install --user magic-impute
   - pip install --user git+https://github.com/milescsmith/AutoImpute.git
-  
-r_packages:
-  - reticulate
-  - parallel
-  - glue
-  - Matrix
-  
-bioc_packages:
-  - SingleCellExperiment
-  - SummarizedExperiment
-  - ensembldb
-  - EnsDb.Hsapiens.v86
 
-Remotes: 
-    satijalab/Seurat@release/3.0
-    milescsmith/ALRA
-    milescsmith/scImpute
+script:
+- R CMD Rd2pdf . --no-clean
+- R CMD build .
+- R CMD check *tar.gz
