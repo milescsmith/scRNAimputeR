@@ -23,7 +23,7 @@ number of unique identities.}
 \item{ensembl_db}{The Ensembl annotation package to use to compute gene lengths.
 Default: EnsDb.Hsapiens.v86}
 
-\item{...}{Additional arguments to pass to \code{\link{scImpute}}}
+\item{...}{Additional arguments to pass to \code{\link{scImpute::scimpute}}}
 }
 \value{
 Seurat
