@@ -21,7 +21,7 @@ Depends:
 Remotes:
     github::milescsmith/ALRA,
     github::milescsmith/scImpute,
-    github::satijalab/seurat@release/3.0
+    github::satijalab/seurat@release/3.0,
     bioc::3.8/SummarizedExperiment,
     bioc::3.8/scater,
     bioc::3.8/ensembldb,
