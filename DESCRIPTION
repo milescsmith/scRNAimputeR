@@ -32,11 +32,10 @@ Remotes:
     github::milescsmith/ALRA,
     github::milescsmith/scImpute,
     bioc::release/AnnotationFilter,
-    bioc::release/EnsDb.Hsapiens.v86,
     bioc::release/ensembldb,
     bioc::release/scater,
     bioc::release/SummarizedExperiment
-Suggests:
+Enhances:
     SingleCellExperiment,
     EnsDb.Hsapiens.v86
 License: BSD_3_clause + file LICENSE
