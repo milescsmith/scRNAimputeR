@@ -11,7 +11,7 @@
 #' @param ident_use Identity variable to use when imputing the data.
 #' @param ensembl_db The Ensembl annotation package to use to compute gene lengths.
 #' Default: EnsDb.Hsapiens.v86 (if available)
-#' @param ... Additional arguments to pass to \code{\link{scImpute::scimpute}}
+#' @param ... Additional arguments to pass to \code{\link{scimpute}}
 #'
 #' @importFrom scImpute scimpute
 #'

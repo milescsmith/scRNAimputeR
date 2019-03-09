@@ -4,7 +4,7 @@
 #' @param object Data object to impute
 #' @param assay_use The assay from which to retrieve data. Default: "RNA"
 #' @param slot_use The slot within the assay to impute. Default: "data"
-#' @param ... additional parameters to pass to \code{\link{ALRA::alra}}
+#' @param ... additional parameters to pass to \code{\link{alra}}
 #'
 #' @importFrom glue glue
 #' @importFrom Matrix Matrix
