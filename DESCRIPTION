@@ -10,14 +10,23 @@ Description: Collects scRNAseq imputation algorithms and
     provides functions for interfacing with Seurat and 
     SingleCellExperiment objects.
 Depends: 
-    R (>= 3.5.0),
+    R (>= 3.5.0)
+Imports:
     Matrix,
     glue (>= 1.3.0),
     magrittr (>= 1.5),
     reticulate (>= 1.10),
     parallel,
     dplyr,
-    tibble
+    tibble,
+    ALRA,
+    AnnotationFilter,
+    EnsDb.Hsapiens.v86,
+    ensembldb,
+    scater,
+    scImpute,
+    Seurat,
+    SummarizedExperiment
 Remotes:
     github::milescsmith/ALRA,
     github::milescsmith/scImpute,
