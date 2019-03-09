@@ -38,6 +38,9 @@ before_install:
   - pip install --user magic-impute
   - pip install --user git+https://github.com/milescsmith/AutoImpute.git
 
+install:
+- R -e 'devtools::install_deps(dep = T)'
+
 script:
-  - R CMD build .
-  - R CMD check *.tar.gz
+- R CMD build .
+- R CMD check *tar.gz
