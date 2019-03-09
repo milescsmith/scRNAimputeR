@@ -61,7 +61,7 @@
 #' @param copy boolean (default: FALSE). If true, a copy of anndata
 #' is returned.
 #'
-#' @importFrom reticulate import py_module_available dict
+#' @importFrom reticulate import py_module_available
 #' @importFrom parallel detectCores
 #' @importFrom glue glue
 #'

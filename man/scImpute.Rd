@@ -21,7 +21,7 @@ number of unique identities.}
 \item{ident_use}{Identity variable to use when imputing the data.}
 
 \item{ensembl_db}{The Ensembl annotation package to use to compute gene lengths.
-Default: EnsDb.Hsapiens.v86}
+Default: EnsDb.Hsapiens.v86 (if available)}
 
 \item{...}{Additional arguments to pass to \code{\link{scImpute::scimpute}}}
 }

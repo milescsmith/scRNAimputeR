@@ -10,10 +10,9 @@
 #' number of unique identities.
 #' @param ident_use Identity variable to use when imputing the data.
 #' @param ensembl_db The Ensembl annotation package to use to compute gene lengths.
-#' Default: EnsDb.Hsapiens.v86
+#' Default: EnsDb.Hsapiens.v86 (if available)
 #' @param ... Additional arguments to pass to \code{\link{scImpute::scimpute}}
 #'
-#' @importFrom EnsDb.Hsapiens.v86 EnsDb.Hsapiens.v86
 #' @importFrom scImpute scimpute
 #'
 #' @return Seurat
@@ -27,7 +26,11 @@ scImpute <- function(object,
                      ...) {
   datExprs <- GatherData(object, assay = assay, slot_use = slot)
   if (is.null(ensembl_db)) {
-    ensembl_db <- EnsDb.Hsapiens.v86
+    if(require(EnsDb.Hsapiens.v86)){
+      ensembl_db <- EnsDb.Hsapiens.v86 
+    } else {
+      stop("Please provide an Ensembl-based annotation package")
+    }
   } else {
     gl <- getGeneLengths(genes = rownames(datExprs), edb = ensembl_db)
   }

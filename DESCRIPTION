@@ -23,7 +23,6 @@ Imports:
     tibble,
     ALRA,
     AnnotationFilter,
-    EnsDb.Hsapiens.v86,
     ensembldb,
     scater,
     scImpute,
@@ -38,7 +37,8 @@ Remotes:
     bioc::release/scater,
     bioc::release/SummarizedExperiment
 Suggests:
-    SingleCellExperiment
+    SingleCellExperiment,
+    EnsDb.Hsapiens.v86
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
