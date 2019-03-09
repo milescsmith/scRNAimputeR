@@ -28,14 +28,8 @@ Imports:
     Seurat,
     SummarizedExperiment
 Remotes:
-    github::milescsmith/ALRA,
-    github::milescsmith/scImpute,
-    github::satijalab/seurat@release/3.0,
-    bioc::3.8/SummarizedExperiment,
-    bioc::3.8/scater,
-    bioc::3.8/ensembldb,
-    bioc::3.8/EnsDb.Hsapiens.v86,
-    bioc::3.8/AnnotationFilter
+    milescsmith/ALRA,
+    milescsmith/scImpute
 Suggests:
     SingleCellExperiment
 License: BSD_3_clause + file LICENSE
