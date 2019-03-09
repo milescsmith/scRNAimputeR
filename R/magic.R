@@ -1,6 +1,6 @@
 #' Magic
-#' 
-#' Wrapper around the Markov Affinity-based Graph Imputation of Cells (MAGIC) 
+#'
+#' Wrapper around the Markov Affinity-based Graph Imputation of Cells (MAGIC)
 #' imputation algorithm from the KrishnaswamyLab
 #'
 #' @param object Data object to impute by MAGIC.
@@ -30,55 +30,58 @@ Magic <- function(object, ...) {
 
 #' @rdname Magic
 #' @method Magic default
-#' 
+#'
 #' @importFrom reticulate py_module_available import
 #' @importFrom glue glue
-#' 
+#'
 #' @return matrix
 #' @export
 Magic.default <- function(object,
-                          genes = NULL, 
-                          k = 10, 
-                          alpha = 15, 
+                          genes = NULL,
+                          k = 10,
+                          alpha = 15,
                           t = "auto",
-                          npca = 100, 
-                          init = NULL, 
+                          npca = 100,
+                          init = NULL,
                           t.max = 20,
-                          knn.dist.method = "euclidean", 
-                          verbose = 1, 
+                          knn.dist.method = "euclidean",
+                          verbose = 1,
                           n.jobs = 1,
                           seed = NULL,
-                          ...){
-  
+                          ...) {
   required_modules <- c("magic")
-  for (i in required_modules){
-    if(!py_module_available(i)){
+  for (i in required_modules) {
+    if (!py_module_available(i)) {
       stop(glue("The {i} module is unavailable.
          Please activate the appropriate environment or
          install the module."))
     }
   }
-  
-  magic.module <- import(module = 'magic', delay_load = TRUE)
-  
+
+  magic.module <- import(module = "magic", delay_load = TRUE)
+
   object %<>% as.data.frame()
-  
+
   if (is.null(genes)) {
     genes <- colnames(object)
   }
-  
-  magic_operator <- magic.module$MAGIC(k = as.integer(k), 
-                                       a = as.integer(alpha), 
-                                       t = t, 
-                                       n_pca = as.integer(npca), 
-                                       knn_dist = knn.dist.method, 
-                                       n_jobs = as.integer(n.jobs), 
-                                       random_state = seed, 
-                                       verbose = verbose)
-  
-  magic_result <- magic_operator$fit_transform(X = object, 
-                                               genes = genes, 
-                                               t_max = t.max)
+
+  magic_operator <- magic.module$MAGIC(
+    k = as.integer(k),
+    a = as.integer(alpha),
+    t = t,
+    n_pca = as.integer(npca),
+    knn_dist = knn.dist.method,
+    n_jobs = as.integer(n.jobs),
+    random_state = seed,
+    verbose = verbose
+  )
+
+  magic_result <- magic_operator$fit_transform(
+    X = object,
+    genes = genes,
+    t_max = t.max
+  )
   return(magic_result)
 }
 
@@ -90,25 +93,28 @@ Magic.Seurat <- function(object,
                          assay_use = "RNA",
                          slot_use = "counts",
                          assay_store = "magic",
-                         genes = NULL, 
-                         k = 10, 
-                         alpha = 15, 
+                         genes = NULL,
+                         k = 10,
+                         alpha = 15,
                          t = "auto",
-                         npca = 100, 
-                         init = NULL, 
+                         npca = 100,
+                         init = NULL,
                          t.max = 20,
-                         knn.dist.method = "euclidean", 
-                         verbose = 1, 
+                         knn.dist.method = "euclidean",
+                         verbose = 1,
                          n.jobs = 1,
                          seed = NULL,
-                         ...){
-
+                         ...) {
   exprDat <- GatherData(object, assay_use, slot_use) %>% t()
 
-  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
-                        t.max,knn.dist.method, verbose, n.jobs,seed)
-  
-  object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
+  magic_result <- Magic(
+    exprDat, genes, k, alpha, t, npca, init,
+    t.max, knn.dist.method, verbose, n.jobs, seed
+  )
+
+  object <- PlaceData(object, 
+                      assay_store = assay_store, 
+                      imputed_data = t(magic_result))
 }
 
 #' @rdname Magic
@@ -118,25 +124,28 @@ Magic.Seurat <- function(object,
 Magic.seurat <- function(object,
                          slot_use = "data",
                          assay_store = "magic",
-                         genes = NULL, 
-                         k = 10, 
-                         alpha = 15, 
+                         genes = NULL,
+                         k = 10,
+                         alpha = 15,
                          t = "auto",
-                         npca = 100, 
-                         init = NULL, 
+                         npca = 100,
+                         init = NULL,
                          t.max = 20,
-                         knn.dist.method = "euclidean", 
-                         verbose = 1, 
+                         knn.dist.method = "euclidean",
+                         verbose = 1,
                          n.jobs = 1,
                          seed = NULL,
-                         ...){
-  
+                         ...) {
   exprDat <- GatherData(object, slot_use) %>% t()
 
-  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
-                        t.max,knn.dist.method, verbose, n.jobs,seed)
-  
-  object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
+  magic_result <- Magic(
+    exprDat, genes, k, alpha, t, npca, init,
+    t.max, knn.dist.method, verbose, n.jobs, seed
+  )
+
+  object <- PlaceData(object, 
+                      assay_store = assay_store, 
+                      imputed_data = t(magic_result))
 }
 
 #' @rdname Magic
@@ -146,23 +155,26 @@ Magic.seurat <- function(object,
 Magic.SingleCellExperiment <- function(object,
                                        assay_use = "logcounts",
                                        assay_store = "magic",
-                                       genes = NULL, 
-                                       k = 10, 
-                                       alpha = 15, 
+                                       genes = NULL,
+                                       k = 10,
+                                       alpha = 15,
                                        t = "auto",
-                                       npca = 100, 
-                                       init = NULL, 
+                                       npca = 100,
+                                       init = NULL,
                                        t.max = 20,
-                                       knn.dist.method = "euclidean", 
-                                       verbose = 1, 
+                                       knn.dist.method = "euclidean",
+                                       verbose = 1,
                                        n.jobs = 1,
                                        seed = NULL,
-                                       ...){
-  
+                                       ...) {
   exprDat <- GatherData(object, assay_use) %>% t()
-  
-  magic_result <- Magic(exprDat, genes, k, alpha, t, npca, init, 
-                        t.max,knn.dist.method, verbose, n.jobs,seed)
-  
-  object <- PlaceData(object, assay_store = assay_store, imputed_data = t(magic_result))
+
+  magic_result <- Magic(
+    exprDat, genes, k, alpha, t, npca, init,
+    t.max, knn.dist.method, verbose, n.jobs, seed
+  )
+
+  object <- PlaceData(object, 
+                      assay_store = assay_store, 
+                      imputed_data = t(magic_result))
 }

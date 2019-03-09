@@ -9,12 +9,14 @@ Authors@R:
 Description: Collects scRNAseq imputation algorithms and 
     provides functions for interfacing with Seurat and 
     SingleCellExperiment objects.
+Url: https://github.com/milescsmith/scRNAimputeR
+BugReports: https://github.com/milescsmith/scRNAimputeR/issues
 Depends: 
-    R (>= 3.5.0)
+    R (>= 3.1)
 Imports:
     Matrix,
     glue (>= 1.3.0),
-    magrittr (>= 1.5),
+    magrittr,
     reticulate (>= 1.10),
     parallel,
     dplyr,
@@ -28,8 +30,13 @@ Imports:
     Seurat,
     SummarizedExperiment
 Remotes:
-    milescsmith/ALRA,
-    milescsmith/scImpute
+    github::milescsmith/ALRA,
+    github::milescsmith/scImpute,
+    bioc::release/AnnotationFilter,
+    bioc::release/EnsDb.Hsapiens.v86,
+    bioc::release/ensembldb,
+    bioc::release/scater,
+    bioc::release/SummarizedExperiment
 Suggests:
     SingleCellExperiment
 License: BSD_3_clause + file LICENSE

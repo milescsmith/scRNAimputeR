@@ -68,87 +68,91 @@
 #' @return A Seurat object with imputed data stored in an assay slot named 'dca'
 #' @export
 #'
-#' @examples
-
 dca <- function(object,
                 assay = "RNA",
                 slot_use = "counts",
-                mode = 'denoise',
-                ae_type = 'zinb-conddisp',
+                mode = "denoise",
+                ae_type = "zinb-conddisp",
                 normalize_per_cell = TRUE,
                 scale = TRUE,
                 log1p = TRUE,
                 batchnorm = TRUE,
-                activation = 'relu',
-                init = 'glorot_uniform',
-                epochs = 300,               # training args
+                activation = "relu",
+                init = "glorot_uniform",
+                epochs = 300, # training args
                 reduce_lr = 10,
                 early_stop = 15,
                 batch_size = 32,
-                optimizer = 'rmsprop',
+                optimizer = "rmsprop",
                 random_state = 0,
                 threads = NULL,
                 verbose = TRUE,
                 return_model = FALSE,
                 return_info = FALSE,
-                copy = FALSE){
-
-  if(!py_module_available('dca')){
+                copy = FALSE) {
+  if (!py_module_available("dca")) {
     stop("The DCA module is unavailable.
          Please activate the appropriate environment or
          install the module.")
   }
-  if(!py_module_available('scanpy')){
+  if (!py_module_available("scanpy")) {
     stop("The scanpy module is unavailable.
          Please activate the appropriate environment or
          install the module.")
   }
 
-  if(is.null(threads)){
+  if (is.null(threads)) {
     threads <- detectCores()
   }
 
   exprDat <- GatherData(object, assay, slot_use) %>% t()
-  dca.module <- import(module = 'dca.api', delay_load = TRUE)
-  scanpy.module <- import(module = 'scanpy.api', delay_load = TRUE)
+  dca.module <- import(module = "dca.api", delay_load = TRUE)
+  scanpy.module <- import(module = "scanpy.api", delay_load = TRUE)
 
   cell.names <- rownames(exprDat)
   gene.names <- colnames(exprDat)
 
   adata <- scanpy.module$AnnData(exprDat,
-                                 obs = cell.names,
-                                 var = gene.names)
+    obs = cell.names,
+    var = gene.names
+  )
   adata$obs_names <- cell.names
   adata$var_names <- gene.names
-  scanpy.module$pp$filter_genes(data = adata,
-                                min_counts = as.integer(1))
+  scanpy.module$pp$filter_genes(
+    data = adata,
+    min_counts = as.integer(1)
+  )
 
-  dca.module$dca(adata = adata,
-                 mode = mode,
-                 ae_type = ae_type,
-                 normalize_per_cell = normalize_per_cell,
-                 scale = scale,
-                 log1p = log1p,
-                 batchnorm = batchnorm,
-                 activation = activation,
-                 init = init,
-                 epochs = as.integer(epochs),
-                 reduce_lr = as.integer(reduce_lr),
-                 early_stop = as.integer(early_stop),
-                 batch_size = as.integer(batch_size),
-                 optimizer = optimizer,
-                 random_state = as.integer(random_state),
-                 threads = as.integer(threads),
-                 verbose = verbose,
-                 return_model = return_model,
-                 return_info = return_info,
-                 copy = copy)
+  dca.module$dca(
+    adata = adata,
+    mode = mode,
+    ae_type = ae_type,
+    normalize_per_cell = normalize_per_cell,
+    scale = scale,
+    log1p = log1p,
+    batchnorm = batchnorm,
+    activation = activation,
+    init = init,
+    epochs = as.integer(epochs),
+    reduce_lr = as.integer(reduce_lr),
+    early_stop = as.integer(early_stop),
+    batch_size = as.integer(batch_size),
+    optimizer = optimizer,
+    random_state = as.integer(random_state),
+    threads = as.integer(threads),
+    verbose = verbose,
+    return_model = return_model,
+    return_info = return_info,
+    copy = copy
+  )
 
   conv <- adata$data %>% t()
   colnames(conv) <- adata$obs_names$values
   rownames(conv) <- adata$var_names$values
-  object <- PlaceData(object = object,
-                      assay_store = "dca",
-                      imputed_data = conv)
+  object <- PlaceData(
+    object = object,
+    assay_store = "dca",
+    imputed_data = conv
+  )
   return(object)
 }

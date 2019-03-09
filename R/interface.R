@@ -6,20 +6,20 @@
 #' @param imputed_data Imputed matrix
 #' @param normalize Should the imputed data be normalized?
 #' @param scale Should the imputed data be scaled?
-#' @param ...  Additional arguments
+#' @param ... Additional arguments
 #'
 #' @return
 #' @export
 #'
 #' @examples
 PlaceData <- function(object, ...) {
-    UseMethod("PlaceData")
-  }
+  UseMethod("PlaceData")
+}
 
 #' @rdname PlaceData
 #' @method PlaceData Seurat
-#' @importFrom Seurat CreateAssayObject NormalizeData ScaleData
-#' @importFrom magrittr %<>%
+# @importFrom Seurat CreateAssayObject NormalizeData ScaleData
+#' @import Seurat
 #' @importFrom Matrix Matrix
 #' @return
 #' @export
@@ -28,15 +28,13 @@ PlaceData.Seurat <- function(object,
                              imputed_data,
                              normalize = "FALSE",
                              scale = "FALSE",
-                             ...){
-            
+                             ...) {
   imputed_data %<>% as.matrix()
   object[[assay_store]] <- CreateAssayObject(data = imputed_data)
-  if (normalize)
-  {
+  if (normalize) {
     object <- NormalizeData(object, assay = assay_store)
   }
-  if (scale){
+  if (scale) {
     object <- ScaleData(object, assay = assay_store)
   }
   return(object)
@@ -44,7 +42,8 @@ PlaceData.Seurat <- function(object,
 
 #' @rdname PlaceData
 #' @method PlaceData seurat
-#' @importFrom Seurat SetAssayData NormalizeData ScaleData
+# @importFrom Seurat SetAssayData NormalizeData ScaleData
+#' @import Seurat
 #' @importFrom Matrix Matrix
 #' @return
 #' @export
@@ -54,17 +53,18 @@ PlaceData.seurat <- function(object,
                              imputed_data,
                              normalize = "FALSE",
                              scale = "FALSE",
-                             ...){
-            
+                             ...) {
   data <- Matrix(data = imputed_data, sparse = TRUE)
-  object <- SetAssayData(object = object, 
-                         assay = assay_store,
-                         slot = slot_use,
-                         new.data = imputed_data)
-  if (normalize){
+  object <- SetAssayData(
+    object = object,
+    assay = assay_store,
+    slot = slot_use,
+    new.data = imputed_data
+  )
+  if (normalize) {
     object <- NormalizeData(object, assay.type = assay_store)
   }
-  if (scale){
+  if (scale) {
     object <- ScaleData(object)
   }
   return(object)
@@ -81,11 +81,10 @@ PlaceData.SingleCellExperiment <- function(object,
                                            assay_store = "new_assay",
                                            imputed_data,
                                            normalize = "FALSE",
-                                           ...){
-  
+                                           ...) {
   data <- Matrix(data = imputed_data, sparse = TRUE)
   assay(object = object, i = assay_store) <- data
-  if (normalize){
+  if (normalize) {
     object <- normalize(object, exprs_values = assay_store)
   }
   return(object)
@@ -98,8 +97,8 @@ PlaceData.SingleCellExperiment <- function(object,
 #' @param slot_use (Default: "data)
 #' @param ... Additional arguments
 GatherData <- function(object, ...) {
-    UseMethod("GatherData")
-  }
+  UseMethod("GatherData")
+}
 
 #' @rdname GatherData
 #' @method GatherData Seurat
@@ -109,10 +108,12 @@ GatherData <- function(object, ...) {
 GatherData.Seurat <- function(object,
                               assay = "RNA",
                               slot_use = "counts",
-                              ...){
-  obj_data <- GetAssayData(object = object, 
-                           assay = assay,
-                           slot = slot_use) %>%
+                              ...) {
+  obj_data <- GetAssayData(
+    object = object,
+    assay = assay,
+    slot = slot_use
+  ) %>%
     as.matrix()
   return(obj_data)
 }
@@ -125,10 +126,12 @@ GatherData.Seurat <- function(object,
 GatherData.seurat <- function(object,
                               assay = "RNA",
                               slot_use = "data",
-                              ...){
-  obj_data <- GetAssayData(object = object, 
-                           assay.type = assay,
-                           slot = slot_use) %>%
+                              ...) {
+  obj_data <- GetAssayData(
+    object = object,
+    assay.type = assay,
+    slot = slot_use
+  ) %>%
     as.matrix()
   return(obj_data)
 }
@@ -140,22 +143,24 @@ GatherData.seurat <- function(object,
 #' @export
 GatherData.SingleCellExperiment <- function(object,
                                             assay = "logcounts",
-                                            ...){
-  if (!assay %in% names(assays(object))){
+                                            ...) {
+  if (!assay %in% names(assays(object))) {
     stop(glue("Sorry, but {assay} is not present in the object.  
               Please run the assay or choose a different assay slot."))
   }
-  
-  obj_data <- assay(object = object, 
-                    i = assay) %>% 
+
+  obj_data <- assay(
+    object = object,
+    i = assay
+  ) %>%
     as.matrix()
-  
+
   return(obj_data)
 }
 
 
 #' @title RetrieveIdents
-#' 
+#'
 #' @description Helper function to retrive cell identity information
 #'
 #' @param object Data object from which to retrieve identiy information
@@ -166,7 +171,7 @@ GatherData.SingleCellExperiment <- function(object,
 #' @export
 #'
 #' @examples
-RetrieveIdents <- function(object, ...){
+RetrieveIdents <- function(object, ...) {
   UseMethod("RetrieveIdents")
 }
 
@@ -175,10 +180,10 @@ RetrieveIdents <- function(object, ...){
 #' @import Seurat
 #' @return matrix
 #' @export
-RetrieveIdents.Seurat <- function(object, 
+RetrieveIdents.Seurat <- function(object,
                                   identity = NULL,
-                                  ...){
-  if (is.null(identity)){
+                                  ...) {
+  if (is.null(identity)) {
     idents <- Idents(object)
   } else {
     idents <- FetchData(object = object, vars = identity, ...)
@@ -191,10 +196,10 @@ RetrieveIdents.Seurat <- function(object,
 #' @import Seurat
 #' @return matrix
 #' @export
-RetrieveIdents.seurat <- function(object, 
+RetrieveIdents.seurat <- function(object,
                                   identity = NULL,
-                                  ...){
-  if (is.null(identity)){
+                                  ...) {
+  if (is.null(identity)) {
     idents <- object@ident
   } else {
     idents <- FetchData(object = object, vars.all = identity, ...)
@@ -209,9 +214,9 @@ RetrieveIdents.seurat <- function(object,
 #' @export
 RetrieveIdents.SingleCellExperiment <- function(object,
                                                 identity = NULL,
-                                                ...){
-  if (is.null(identity)){
-    if ("ident" %in% colnames(colData(object))){
+                                                ...) {
+  if (is.null(identity)) {
+    if ("ident" %in% colnames(colData(object))) {
       idents <- colData(object)[[identity]]
     } else {
       stop("No identity variable given and no default ident present.")
