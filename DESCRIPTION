@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Miles",
            family = "Smith",
            role = c("aut", "cre"),
-           email = "mileschristiansmith@gmail.com")
+           email = "miles-smith@omrf.org")
 Description: Collects scRNAseq imputation algorithms and 
     provides functions for interfacing with Seurat and 
     SingleCellExperiment objects.
