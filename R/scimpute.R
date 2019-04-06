@@ -61,14 +61,14 @@ scImpute <- function(object,
 
 #' @importFrom ensembldb cdsBy
 #' @importFrom dplyr select mutate group_by top_n distinct
-#' @importFrom AnnotationFilter GeneNameFilter
+#' @importFrom AnnotationFilter GenenameFilter
 #' @importFrom tibble as_tibble
 getGeneLengths <- function(genes, edb = NULL) {
   if (is.null(edb)) {
     stop("Must specify the Ensembl annotation package appropriate for your species")
   }
 
-  txs <- cdsBy(edb, filter = GeneNameFilter(genes)) %>%
+  txs <- cdsBy(edb, filter = GenenameFilter(genes)) %>%
     unlist() %>%
     as_tibble() %>%
     mutate(length = end - start) %>%
