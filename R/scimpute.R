@@ -31,10 +31,10 @@ scImpute <- function(object,
     } else {
       stop("Please provide an Ensembl-based annotation package")
     }
-  } else {
-    gl <- getGeneLengths(genes = rownames(datExprs), edb = ensembl_db)
-  }
-
+  } 
+  
+  gene_lengths <- getGeneLengths(genes = rownames(datExprs), edb = ensembl_db)
+  
   if (is.null(num_clusters) & is.null(ident_use)) {
     num_clusters <- RetrieveIdents(object) %>% unique() %>% length()
     idents <- NULL
@@ -43,17 +43,17 @@ scImpute <- function(object,
   }
 
   sc_data <- scimpute(
-    datExpr = datExprs[gl$gene_name, ],
+    datExpr = datExprs[gene_lengths$gene_name, ],
     type = "count",
     Kcluster = num_clusters,
     labels = idents,
-    genelen = gl$length,
+    genelen = gene_lengths$length,
     ...
   )
 
   object <- PlaceData(
     object = object,
-    imputed_data = sc_data,
+    imputed_data = sc_data$count_imp,
     assay_store = "scimpute"
   )
   return(object)
@@ -61,14 +61,14 @@ scImpute <- function(object,
 
 #' @importFrom ensembldb cdsBy
 #' @importFrom dplyr select mutate group_by top_n distinct
-#' @importFrom AnnotationFilter GenenameFilter
+#' @importFrom AnnotationFilter GeneNameFilter
 #' @importFrom tibble as_tibble
 getGeneLengths <- function(genes, edb = NULL) {
   if (is.null(edb)) {
     stop("Must specify the Ensembl annotation package appropriate for your species")
   }
 
-  txs <- cdsBy(edb, filter = GenenameFilter(genes)) %>%
+  txs <- cdsBy(edb, filter = GeneNameFilter(genes)) %>%
     unlist() %>%
     as_tibble() %>%
     mutate(length = end - start) %>%
